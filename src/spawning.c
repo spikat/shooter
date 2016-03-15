@@ -20,8 +20,6 @@ int         spawn_asteroid(shooter_ctx* ctx, int x, int y)
         if (!fo) return (ENOMEM);
     }
 
-    fo->x = x;
-    fo->y = y;
     fo->xspeed = (rand() % (ASTEROID_MAX_X_VELOCITY - 1) + 1);
     fo->yspeed = (rand() % (ASTEROID_MAX_Y_VELOCITY - 1) + 1);
     if (x > SCREEN_WIDTH / 2)
@@ -31,6 +29,9 @@ int         spawn_asteroid(shooter_ctx* ctx, int x, int y)
         SDL_ERROR("SDL_QueryTexture");
         return (1);
     }
+    fo->x = x;
+    if (y) fo->y = y;
+    else fo->y = fo->sy * -1;
     fo->next = ctx->fos;
     ctx->fos = fo;
     return (0);
