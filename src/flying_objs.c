@@ -10,7 +10,7 @@ int         manage_flying_obj(shooter_ctx* ctx)
         fo->y += fo->yspeed;
         if (fo->x > SCREEN_WIDTH ||
             fo->y > SCREEN_HEIGHT ||
-            fo->x + fo->sx < 0) {
+            fo->x + fo->a->sx < 0) {
             /* detach */
             if (last) last->next = fo->next;
             else ctx->fos = fo->next;

@@ -1,21 +1,17 @@
 #include "shooter.h"
 #include "assets.h"
 
-int     draw_image(shooter_ctx* ctx, SDL_Texture* t, int x, int y)
+int     draw_image(shooter_ctx* ctx, asset* a, int x, int y)
 {
     int         ret;
     SDL_Rect    dest;
 
     dest.x = x;
     dest.y = y;
-
-    ret = SDL_QueryTexture(t, NULL, NULL, &dest.w, &dest.h);/* TODO: save these at init time -_- */
-    if (ret) {
-        SDL_ERROR("SDL_QueryTexture");
-        return (ret);
-    }
+    dest.w = a->sx;
+    dest.h = a->sy;
     
-    ret = SDL_RenderCopy(ctx->renderer, t, NULL, &dest);
+    ret = SDL_RenderCopy(ctx->renderer, a->texture, NULL, &dest);
     if (ret) {
         SDL_ERROR("SDL_RenderCopy");
         return (ret);
@@ -23,7 +19,7 @@ int     draw_image(shooter_ctx* ctx, SDL_Texture* t, int x, int y)
     return (0);
 }
 
-int     draw_background(shooter_ctx* ctx, SDL_Texture* t, int x, int y)
+int     draw_background(shooter_ctx* ctx, asset* a, int x, int y)
 {
     int         ret;
     SDL_Rect    dest;
@@ -33,7 +29,7 @@ int     draw_background(shooter_ctx* ctx, SDL_Texture* t, int x, int y)
     dest.w = SCREEN_WIDTH;
     dest.h = SCREEN_HEIGHT;
     
-    ret = SDL_RenderCopy(ctx->renderer, t, NULL, &dest);
+    ret = SDL_RenderCopy(ctx->renderer, a->texture, NULL, &dest);
     if (ret) {
         SDL_ERROR("SDL_RenderCopy");
         return (ret);
@@ -41,11 +37,11 @@ int     draw_background(shooter_ctx* ctx, SDL_Texture* t, int x, int y)
     return (0);
 }
 
-#define _DRAW_IMAGE(ctx, texture, x, y)             \
-    if (draw_image(ctx, texture, x, y)) return (1)
+#define _DRAW_IMAGE(ctx, a, x, y)             \
+    if (draw_image(ctx, a, x, y)) return (1)
 
-#define _DRAW_BACKGROUND(ctx, texture, x, y)             \
-    if (draw_background(ctx, texture, x, y)) return (1)
+#define _DRAW_BACKGROUND(ctx, a, x, y)             \
+    if (draw_background(ctx, a, x, y)) return (1)
 
 int     draw(shooter_ctx* ctx)
 {
@@ -54,15 +50,15 @@ int     draw(shooter_ctx* ctx)
 
     /* BACKGROUND */
     /* if (first) { */
-        SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, 255);
-        SDL_RenderClear(ctx->renderer);
+    SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, 255);
+    SDL_RenderClear(ctx->renderer);
         /* first = 0; */
     /* } */
     _DRAW_BACKGROUND(ctx, ctx->a[background0], 0, 0);
 
     /* FLYING OBJS */
     for (fo = ctx->fos; fo; fo = fo->next) {
-        _DRAW_IMAGE(ctx, fo->texture, fo->x, fo->y);
+        _DRAW_IMAGE(ctx, fo->a, fo->x, fo->y);
     }
 
     /* player ship */

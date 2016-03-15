@@ -81,21 +81,11 @@ int     deps_cleanup(shooter_ctx* ctx)
     return (0);
 }
 
-int     change_player_ship(shooter_ctx* ctx, SDL_Texture* new)
-{
-    ctx->p.ship = new;
-    if (SDL_QueryTexture(ctx->p.ship, NULL, NULL, &(ctx->p.sx), &(ctx->p.sy))) {
-        SDL_ERROR("SDL_QueryTexture");
-        return (1);
-    }
-    return (0);
-}
-
 int     init_player(shooter_ctx* ctx)
 {
     if (!ctx) return (EINVAL);
     ctx->p.x = SCREEN_WIDTH / 2;
     ctx->p.y = SCREEN_HEIGHT * 0.9;
-    change_player_ship(ctx, ctx->a[ship1]);
+    ctx->p.ship = ctx->a[ship1];
     return (0);
 }

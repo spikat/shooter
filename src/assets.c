@@ -58,14 +58,17 @@ struct texture_asset asset_table [] = {
 };
 
 
-int     load_image(shooter_ctx* ctx, char *name, SDL_Texture** texture)
+/* int     load_image(shooter_ctx* ctx, char *name, SDL_Texture** texture) */
+int     load_image(shooter_ctx* ctx, char *name, asset** a)
 {
-    SDL_Surface *loadedImage = NULL;
+    SDL_Surface* loadedImage = NULL;
+    int          ret;
 
-    *texture = NULL;
+    *a = malloc(sizeof(**a));
+    if (!(*a)) return (ENOMEM);
     loadedImage = IMG_Load(name);
     if (loadedImage != NULL) {
-        *texture = SDL_CreateTextureFromSurface(ctx->renderer, loadedImage);
+        (*a)->texture = SDL_CreateTextureFromSurface(ctx->renderer, loadedImage);
         SDL_FreeSurface(loadedImage);
     }
     else {
@@ -73,9 +76,15 @@ int     load_image(shooter_ctx* ctx, char *name, SDL_Texture** texture)
         return (1);
     }
 
-    if (!(*texture)) {
+    if (!((*a)->texture)) {
         SDL_ERROR("SDL_CreateTextureFromSurface");
         return (1);
+    }
+
+    ret = SDL_QueryTexture((*a)->texture, NULL, NULL, &((*a)->sx), &((*a)->sy));
+    if (ret) {
+        SDL_ERROR("SDL_QueryTexture");
+        return (ret);
     }
     return (0);
 
@@ -101,7 +110,9 @@ int     unload_assets(shooter_ctx* ctx)
     unsigned int i;
 
     if (!ctx) return (EINVAL);
-    for (i = 0; i < (enum asset)last; i++)
-        SDL_DestroyTexture(ctx->a[i]);
+    for (i = 0; i < (enum asset)last; i++) {
+        SDL_DestroyTexture(ctx->a[i]->texture);
+        free(ctx->a[i]);
+    }
     return (0);
 }

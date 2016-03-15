@@ -46,20 +46,24 @@ typedef struct  s_input {
     int         escape; // escape
 }               input;
 
+typedef struct      s_asset {
+    SDL_Texture*    texture;
+    int             sx, sy;
+}                   asset;
+
 typedef struct      s_player {
     /* player position */
     int             x, y;
-    /* player ship size */
-    SDL_Texture*    ship;
-    int             sx, sy;
+    /* player ship */
+    asset*          ship;
 }                   player;
 
 typedef struct      s_flying_obj {
-    SDL_Texture*    texture;
+    asset*          a;
     int             x, y;
-    int             sx, sy;
     int             xspeed, yspeed;
     /* int             collisionable; */
+    /* int             layer; */
     struct s_flying_obj* next;
 }                   flying_obj;
 
@@ -67,7 +71,7 @@ typedef struct      s_shooter_ctx {
     SDL_Window*     screen;
     SDL_Renderer*   renderer;
     input           i;
-    SDL_Texture**   a;
+    asset**         a;
     player          p;
     flying_obj*     fos;
     flying_obj*     free_fos;

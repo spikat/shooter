@@ -24,14 +24,10 @@ int         spawn_asteroid(shooter_ctx* ctx, int x, int y)
     fo->yspeed = (rand() % ASTEROID_MAX_Y_VELOCITY) + 1;
     if (x > SCREEN_WIDTH / 2)
         fo->xspeed *= -1;
-    fo->texture = ctx->a[asteroid1a + rand() % 20];
-    if (SDL_QueryTexture(fo->texture, NULL, NULL, &(fo->sx), &(fo->sy))) {
-        SDL_ERROR("SDL_QueryTexture");
-        return (1);
-    }
+    fo->a = ctx->a[asteroid1a + rand() % 20];
     fo->x = x;
     if (y) fo->y = y;
-    else fo->y = fo->sy * -1;
+    else fo->y = fo->a->sy * -1;
     fo->next = ctx->fos;
     ctx->fos = fo;
     return (0);

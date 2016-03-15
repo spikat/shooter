@@ -111,9 +111,9 @@ int     parse_input(shooter_ctx* ctx)
 
     /* check borders */
     if (ctx->p.x < 0) ctx->p.x = 0;
-    if ((ctx->p.x + ctx->p.sx) >= SCREEN_WIDTH) ctx->p.x = (SCREEN_WIDTH - ctx->p.sx);
+    if ((ctx->p.x + ctx->p.ship->sx) >= SCREEN_WIDTH) ctx->p.x = (SCREEN_WIDTH - ctx->p.ship->sx);
     if (ctx->p.y < 0) ctx->p.y = 0;
-    if (ctx->p.y + ctx->p.sy > SCREEN_HEIGHT) ctx->p.y = SCREEN_HEIGHT - ctx->p.sy;
+    if (ctx->p.y + ctx->p.ship->sy > SCREEN_HEIGHT) ctx->p.y = SCREEN_HEIGHT - ctx->p.ship->sy;
 
     return (0);
 }
