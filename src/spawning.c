@@ -28,6 +28,12 @@ int         spawn_asteroid(shooter_ctx* ctx, int x, int y)
     fo->x = x;
     if (y) fo->y = y;
     else fo->y = fo->a->sy * -1;
+
+    /* collission init */
+    fo->collisionable = 1;
+    fill_collision_square(&(fo->col), fo->a->sx, fo->a->sy);
+    fo->col_damage = ASTEROID_COL_DAMAGE;
+
     fo->next = ctx->fos;
     ctx->fos = fo;
     return (0);

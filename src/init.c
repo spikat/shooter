@@ -2,7 +2,6 @@
 #include <time.h>
 
 #include "shooter.h"
-#include "assets.h"
 
 int     deps_init(shooter_ctx* ctx)
 {
@@ -78,14 +77,5 @@ int     deps_cleanup(shooter_ctx* ctx)
     Mix_Quit();
 
     SDL_Quit();
-    return (0);
-}
-
-int     init_player(shooter_ctx* ctx)
-{
-    if (!ctx) return (EINVAL);
-    ctx->p.x = SCREEN_WIDTH / 2;
-    ctx->p.y = SCREEN_HEIGHT * 0.9;
-    ctx->p.ship = ctx->a[ship1];
     return (0);
 }

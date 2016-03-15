@@ -23,6 +23,10 @@
 /* #define SCREEN_HEIGHT   1080 */
 
 #define PLAYER_PIXELS_PER_MOVE  15
+#define PLAYER_BASE_ARMOR       100
+#define PLAYER_BASE_SHIELD      0
+
+#define ASTEROID_COL_DAMAGE     45
 
 #define TICK_60_FPS     16 /* 60FPS */
 
@@ -51,19 +55,31 @@ typedef struct      s_asset {
     int             sx, sy;
 }                   asset;
 
+typedef struct      s_collision_sqr {
+    int             x, y;
+    int             sx, sy;
+}                   collision_sqr;
+
 typedef struct      s_player {
     /* player position */
     int             x, y;
     /* player ship */
     asset*          ship;
+    int             armor;
+    int             shield;
+    /* collision square */
+    collision_sqr   col;
 }                   player;
 
 typedef struct      s_flying_obj {
+    /* int             layer; */
     asset*          a;
     int             x, y;
     int             xspeed, yspeed;
-    /* int             collisionable; */
-    /* int             layer; */
+    /* collision square */
+    int             collisionable;
+    collision_sqr   col;
+    int             col_damage;
     struct s_flying_obj* next;
 }                   flying_obj;
 
@@ -85,7 +101,6 @@ typedef struct      s_shooter_ctx {
 /* init.c */
 int     deps_init(shooter_ctx* ctx);
 int     deps_cleanup(shooter_ctx* ctx);
-int     init_player(shooter_ctx* ctx);
 /* inputs.c */
 int     manage_inputs(shooter_ctx* ctx);
 /* draw.c */
@@ -99,5 +114,13 @@ int     load_assets(shooter_ctx* ctx);
 int     unload_assets(shooter_ctx* ctx);
 /* flying_objs.c */
 int     manage_flying_obj(shooter_ctx* ctx);
+/* player.c */
+int     init_player(shooter_ctx* ctx);
+int     change_player_ship(shooter_ctx* ctx, asset* a);
+/* collision.c */
+void    fill_collision_square(collision_sqr* col, int sx, int sy);
+int     boom(collision_sqr* col1, int x1, int y1,
+             collision_sqr* col2, int x2, int y2);
+
 
 #endif /* __SHOOTER_H__ */
