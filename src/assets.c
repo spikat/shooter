@@ -57,8 +57,6 @@ struct texture_asset asset_table [] = {
     { last, NULL }
 };
 
-
-/* int     load_image(shooter_ctx* ctx, char *name, SDL_Texture** texture) */
 int     load_image(shooter_ctx* ctx, char *name, asset** a)
 {
     SDL_Surface* loadedImage = NULL;
