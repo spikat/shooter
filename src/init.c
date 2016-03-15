@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include <time.h>
+
 #include "shooter.h"
 #include "assets.h"
 
@@ -50,9 +53,10 @@ int     deps_init(shooter_ctx* ctx)
     }
     if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
         SDL_ERROR("Mix_OpenAudio");
-		return (1);
-	}
-	Mix_AllocateChannels(32);
+        return (1);
+    }
+    Mix_AllocateChannels(32);
+    srand(time(NULL));
     return (0);
 }
 
@@ -97,7 +101,7 @@ int     load_image(shooter_ctx* ctx, char *name, SDL_Texture** texture)
         return (1);
     }
     return (0);
- 
+
 }
 
 #define _LOAD_IMAGE(ctx, path, pobj)                     \
@@ -116,7 +120,10 @@ int     load_assets(shooter_ctx* ctx)
         SDL_ERROR("SDL_QueryTexture");
         return (1);
     }
-    /* printf("sx = %i sy = %i\n", ctx->p.sx, ctx->p.sy); */
+
+    /* asteroids */
+    _LOAD_IMAGE(ctx, A_ASTEROID1, &(ctx->a.asteroid1));
+
     return (0);
 }
 
@@ -125,6 +132,7 @@ int     unload_assets(shooter_ctx* ctx)
     if (!ctx) return (EINVAL);
     SDL_DestroyTexture(ctx->a.background);
     SDL_DestroyTexture(ctx->a.player_ship);
+    SDL_DestroyTexture(ctx->a.asteroid1);
     return (0);
 }
 

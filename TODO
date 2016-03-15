@@ -1,0 +1,78 @@
+TODO LIST
+=========
+
+== Background
+
+space random elements
+planet random elements
+
+== Weapons
+
+simple player weapons
+simple enemies weapons
+manage pew pew collisions
+manage ships collisions
+bombs
+charge weapons
+
+== HUD
+
+armor
+shield
+level progression
+score
+money
+bombs counter
+
+== Player
+
+armor
+shield
+weapons switch
+bombing
+
+== Enemy
+
+asteroids
+simple enemies
+first boss
+second boss
+..
+
+== Lua
+
+script first level
+script enemies
+script weapons
+
+== bonus
+
+invincibility
+nuke board
+
+== buy system
+
+ships
+weapons
+repair ship
+subsystems (shields + ?)
+
+== Multiplayer
+
+wait for player / join players
+auto join party
+player color
+player name
+pvp mode
+score share
+
+== Features
+
+visioning
+pause
+intro
+menus (options etc)
+configuration file (to choose binds, resolution etc)
+bonus / loot per enemy and levels
+make an open / persistent world
+rpg stuff? level progression? classes?

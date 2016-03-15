@@ -23,7 +23,10 @@ int     main(__attribute__((unused)) int ac, __attribute__((unused)) char** av)
         if (ret) break;
 
         if (ctx.i.escape) break;
-        
+
+        ret = spawning(&ctx);
+        if (ret) return (ret);
+
         ret = draw(&ctx);
         if (ret) break;
 

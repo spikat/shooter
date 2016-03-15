@@ -47,16 +47,23 @@ typedef struct  s_input {
 typedef struct  s_assets {
     SDL_Texture*    background;
     SDL_Texture*    player_ship;
+    SDL_Texture*    asteroid1;
 }               assets;
 
 typedef struct      s_player {
     /* player position */
-    int             x;
-    int             y;
+    int             x, y;
     /* player ship size */
-    int             sx;
-    int             sy;
+    int             sx, sy;
 }                   player;
+
+typedef struct      s_asteroid {
+    SDL_Texture*    texture;
+    int             x, y;
+    int             sx, sy;
+    int             xspeed, yspeed;
+    struct s_asteroid* next;
+}                   asteroid;
 
 typedef struct      s_shooter_ctx {
     SDL_Window*     screen;
@@ -64,6 +71,7 @@ typedef struct      s_shooter_ctx {
     input           i;
     assets          a;
     player          p;
+    asteroid*       as;
 }                   shooter_ctx;
 
 /*
@@ -82,5 +90,7 @@ int     manage_inputs(shooter_ctx* ctx);
 int     draw(shooter_ctx* ctx);
 /* delay.c */
 void    delay(unsigned int frame_limit);
+/* spawning.c */
+int     spawning(shooter_ctx* ctx);
 
 #endif /* __SHOOTER_H__ */

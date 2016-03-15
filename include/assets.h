@@ -3,5 +3,6 @@
 
 #define A_BACKGROUND    "assets/sprites/backgrounds/stars.png"
 #define A_SHIP1         "assets/sprites/ships/ship1.png"
+#define A_ASTEROID1     "assets/sprites/asteroids/asteroid1.png"
 
 #endif /* __ASSETS_H__ */
