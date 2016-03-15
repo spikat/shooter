@@ -7,20 +7,29 @@ int     main(__attribute__((unused)) int ac, __attribute__((unused)) char** av)
     int             ret;
     int             run = 1;
     
-    ret = shooter_init(&ctx);
+    ret = deps_init(&ctx);
     if (ret) return (ret);
 
+    ret = load_assets(&ctx);
+    if (ret) return (ret);
+
+    ret = init_player(&ctx);
+    if (ret) return (ret);        
+
     while (run) {
-        framelimit = SDL_GetTicks() + FRAME_TICKS;
+        framelimit = SDL_GetTicks() + TICK_60_FPS;
 
         ret = manage_inputs(&ctx);
         if (ret) break;
 
+        if (ctx.i.escape) break;
+        
         ret = draw(&ctx);
         if (ret) break;
 
         delay(framelimit);
     }
-    shooter_cleanup(&ctx);
+    unload_assets(&ctx);
+    deps_cleanup(&ctx);
     return (ret);
 }

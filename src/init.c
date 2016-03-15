@@ -1,6 +1,7 @@
 #include "shooter.h"
+#include "assets.h"
 
-int     shooter_init(shooter_ctx* ctx)
+int     deps_init(shooter_ctx* ctx)
 {
     if (!ctx) return (EINVAL);
     bzero(ctx, sizeof(*ctx));
@@ -47,10 +48,15 @@ int     shooter_init(shooter_ctx* ctx)
         SDL_ERROR("Mix_Init");
         return (1);
     }
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024) == -1) {
+        SDL_ERROR("Mix_OpenAudio");
+		return (1);
+	}
+	Mix_AllocateChannels(32);
     return (0);
 }
 
-int     shooter_cleanup(shooter_ctx* ctx)
+int     deps_cleanup(shooter_ctx* ctx)
 {
     if (!ctx) return (EINVAL);
 
@@ -68,5 +74,64 @@ int     shooter_cleanup(shooter_ctx* ctx)
     Mix_Quit();
 
     SDL_Quit();
+    return (0);
+}
+
+int     load_image(shooter_ctx* ctx, char *name, SDL_Texture** texture)
+{
+    SDL_Surface *loadedImage = NULL;
+
+    *texture = NULL;
+    loadedImage = IMG_Load(name);
+    if (loadedImage != NULL) {
+        *texture = SDL_CreateTextureFromSurface(ctx->renderer, loadedImage);
+        SDL_FreeSurface(loadedImage);
+    }
+    else {
+        SDL_ERROR("IMG_Load");
+        return (1);
+    }
+
+    if (!(*texture)) {
+        SDL_ERROR("SDL_CreateTextureFromSurface");
+        return (1);
+    }
+    return (0);
+ 
+}
+
+#define _LOAD_IMAGE(ctx, path, pobj)                     \
+    if (load_image(ctx, path, pobj)) return (1)
+
+int     load_assets(shooter_ctx* ctx)
+{
+    if (!ctx) return (EINVAL);
+
+    /* backgrounds */
+    _LOAD_IMAGE(ctx, A_BACKGROUND, &(ctx->a.background));
+
+    /* player ship */
+    _LOAD_IMAGE(ctx, A_SHIP1, &(ctx->a.player_ship));
+    if (SDL_QueryTexture(ctx->a.player_ship, NULL, NULL, &(ctx->p.sx), &(ctx->p.sy))) {
+        SDL_ERROR("SDL_QueryTexture");
+        return (1);
+    }
+    /* printf("sx = %i sy = %i\n", ctx->p.sx, ctx->p.sy); */
+    return (0);
+}
+
+int     unload_assets(shooter_ctx* ctx)
+{
+    if (!ctx) return (EINVAL);
+    SDL_DestroyTexture(ctx->a.background);
+    SDL_DestroyTexture(ctx->a.player_ship);
+    return (0);
+}
+
+int     init_player(shooter_ctx* ctx)
+{
+    if (!ctx) return (EINVAL);
+    ctx->p.x = SCREEN_WIDTH / 2;
+    ctx->p.x = SCREEN_HEIGHT * 0.9;
     return (0);
 }
