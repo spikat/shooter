@@ -2,9 +2,9 @@
 #include "assets.h"
 
 #define ASTEROID_SPAWN_RATE     10
-#define ASTEROID_SPAWN_CHANCE   3
+#define ASTEROID_SPAWN_CHANCE   2
 
-#define ASTEROID_MAX_X_VELOCITY 10
+#define ASTEROID_MAX_X_VELOCITY 5
 #define ASTEROID_MAX_Y_VELOCITY 10
 
 int         spawn_asteroid(shooter_ctx* ctx, int x, int y)
@@ -20,8 +20,8 @@ int         spawn_asteroid(shooter_ctx* ctx, int x, int y)
         if (!fo) return (ENOMEM);
     }
 
-    fo->xspeed = (rand() % (ASTEROID_MAX_X_VELOCITY - 1) + 1);
-    fo->yspeed = (rand() % (ASTEROID_MAX_Y_VELOCITY - 1) + 1);
+    fo->xspeed = (rand() % ASTEROID_MAX_X_VELOCITY) + 1;
+    fo->yspeed = (rand() % ASTEROID_MAX_Y_VELOCITY) + 1;
     if (x > SCREEN_WIDTH / 2)
         fo->xspeed *= -1;
     fo->texture = ctx->a[asteroid1a + rand() % 20];
