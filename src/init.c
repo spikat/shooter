@@ -132,6 +132,6 @@ int     init_player(shooter_ctx* ctx)
 {
     if (!ctx) return (EINVAL);
     ctx->p.x = SCREEN_WIDTH / 2;
-    ctx->p.x = SCREEN_HEIGHT * 0.9;
+    ctx->p.y = SCREEN_HEIGHT * 0.9;
     return (0);
 }
