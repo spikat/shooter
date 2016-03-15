@@ -26,6 +26,8 @@
 
 #define TICK_60_FPS     16 /* 60FPS */
 
+#define MAX_FREE_FOS    64
+
 #define SDL_ERROR(x)                                                \
     printf("%s: %s Error: %s\n", __FUNCTION__, x, SDL_GetError());
 
@@ -44,34 +46,32 @@ typedef struct  s_input {
     int         escape; // escape
 }               input;
 
-typedef struct  s_assets {
-    SDL_Texture*    background;
-    SDL_Texture*    player_ship;
-    SDL_Texture*    asteroid1;
-}               assets;
-
 typedef struct      s_player {
     /* player position */
     int             x, y;
     /* player ship size */
+    SDL_Texture*    ship;
     int             sx, sy;
 }                   player;
 
-typedef struct      s_asteroid {
+typedef struct      s_flying_obj {
     SDL_Texture*    texture;
     int             x, y;
     int             sx, sy;
     int             xspeed, yspeed;
-    struct s_asteroid* next;
-}                   asteroid;
+    /* int             collisionable; */
+    struct s_flying_obj* next;
+}                   flying_obj;
 
 typedef struct      s_shooter_ctx {
     SDL_Window*     screen;
     SDL_Renderer*   renderer;
     input           i;
-    assets          a;
+    SDL_Texture**   a;
     player          p;
-    asteroid*       as;
+    flying_obj*     fos;
+    flying_obj*     free_fos;
+    unsigned int    free_fos_cpt;
 }                   shooter_ctx;
 
 /*
@@ -81,8 +81,6 @@ typedef struct      s_shooter_ctx {
 /* init.c */
 int     deps_init(shooter_ctx* ctx);
 int     deps_cleanup(shooter_ctx* ctx);
-int     load_assets(shooter_ctx* ctx);
-int     unload_assets(shooter_ctx* ctx);
 int     init_player(shooter_ctx* ctx);
 /* inputs.c */
 int     manage_inputs(shooter_ctx* ctx);
@@ -92,5 +90,10 @@ int     draw(shooter_ctx* ctx);
 void    delay(unsigned int frame_limit);
 /* spawning.c */
 int     spawning(shooter_ctx* ctx);
+/* assets.c */
+int     load_assets(shooter_ctx* ctx);
+int     unload_assets(shooter_ctx* ctx);
+/* flying_objs.c */
+int     manage_flying_obj(shooter_ctx* ctx);
 
 #endif /* __SHOOTER_H__ */

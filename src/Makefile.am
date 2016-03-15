@@ -1,7 +1,7 @@
 bin_PROGRAMS				= spishooter spishooter_static
 
-spishooter_SOURCES			= main.c init.c draw.c inputs.c delay.c
- spishooter_static_SOURCES	= $(spishooter_SOURCES)
+spishooter_SOURCES			= main.c init.c draw.c inputs.c delay.c spawning.c assets.c flying_objs.c
+spishooter_static_SOURCES	= $(spishooter_SOURCES)
 
 spishooter_CFLAGS			= -Wall -I$(top_srcdir)/include $(shell sdl2-config --cflags)
 spishooter_static_CFLAGS	= $(spishooter_CFLAGS)

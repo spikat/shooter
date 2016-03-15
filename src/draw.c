@@ -1,4 +1,5 @@
 #include "shooter.h"
+#include "assets.h"
 
 int     draw_image(shooter_ctx* ctx, SDL_Texture* t, int x, int y)
 {
@@ -8,7 +9,7 @@ int     draw_image(shooter_ctx* ctx, SDL_Texture* t, int x, int y)
     dest.x = x;
     dest.y = y;
 
-    ret = SDL_QueryTexture(t, NULL, NULL, &dest.w, &dest.h);
+    ret = SDL_QueryTexture(t, NULL, NULL, &dest.w, &dest.h);/* TODO: save these at init time -_- */
     if (ret) {
         SDL_ERROR("SDL_QueryTexture");
         return (ret);
@@ -48,17 +49,26 @@ int     draw_background(shooter_ctx* ctx, SDL_Texture* t, int x, int y)
 
 int     draw(shooter_ctx* ctx)
 {
-    static int first = 1;
+    /* static int  first = 1; */
+    flying_obj* fo;
 
-    if (first) {
+    /* BACKGROUND */
+    /* if (first) { */
         SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, 255);
         SDL_RenderClear(ctx->renderer);
         /* first = 0; */
+    /* } */
+    _DRAW_BACKGROUND(ctx, ctx->a[background0], 0, 0);
+
+    /* FLYING OBJS */
+    for (fo = ctx->fos; fo; fo = fo->next) {
+        _DRAW_IMAGE(ctx, fo->texture, fo->x, fo->y);
     }
 
-    _DRAW_BACKGROUND(ctx, ctx->a.background, 0, 0);
-    _DRAW_IMAGE(ctx, ctx->a.player_ship, ctx->p.x, ctx->p.y);
+    /* player ship */
+    _DRAW_IMAGE(ctx, ctx->p.ship, ctx->p.x, ctx->p.y);
 
+    /* draw all */
 	SDL_RenderPresent(ctx->renderer);
 
     /* SDL_Delay(1); /\* ?? TODO *\/ */

@@ -6,7 +6,7 @@ int     main(__attribute__((unused)) int ac, __attribute__((unused)) char** av)
     unsigned int    framelimit;
     int             ret;
     int             run = 1;
-    
+
     ret = deps_init(&ctx);
     if (ret) return (ret);
 
@@ -14,7 +14,7 @@ int     main(__attribute__((unused)) int ac, __attribute__((unused)) char** av)
     if (ret) return (ret);
 
     ret = init_player(&ctx);
-    if (ret) return (ret);        
+    if (ret) return (ret);
 
     while (run) {
         framelimit = SDL_GetTicks() + TICK_60_FPS;
@@ -23,6 +23,9 @@ int     main(__attribute__((unused)) int ac, __attribute__((unused)) char** av)
         if (ret) break;
 
         if (ctx.i.escape) break;
+
+        if (manage_flying_obj(&ctx))
+            break;
 
         ret = spawning(&ctx);
         if (ret) return (ret);
