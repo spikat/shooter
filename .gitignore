@@ -44,3 +44,6 @@ config.status
 configure
 .deps
 stamp-h1
+
+# emacs temp files
+*~
