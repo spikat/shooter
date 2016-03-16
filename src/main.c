@@ -1,5 +1,13 @@
 #include "shooter.h"
 
+void    usage(void)
+{
+    puts("commads:\n"
+         "    - use arrows to move\n"
+         "    - use 'v' to pew pew\n"
+         "    - use 'escape' to quit");
+}
+
 int     main(__attribute__((unused)) int ac, __attribute__((unused)) char** av)
 {
     shooter_ctx     ctx;
@@ -15,6 +23,8 @@ int     main(__attribute__((unused)) int ac, __attribute__((unused)) char** av)
 
     ret = init_player(&ctx);
     if (ret) return (ret);
+
+    usage();
 
     while (run) {
         framelimit = SDL_GetTicks() + TICK_60_FPS;

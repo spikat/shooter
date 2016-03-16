@@ -60,6 +60,23 @@ typedef struct      s_collision_sqr {
     int             sx, sy;
 }                   collision_sqr;
 
+typedef struct      s_pew {
+    asset*          a;
+    int             damage;
+    int             xspeed;
+    int             yspeed;
+}                   pew;
+
+typedef struct      s_gun {
+    pew             pew;
+    /* asset*       gun; */ /* TODO */
+    int             firerate;
+    int             firecd;
+    int             xoff;
+    int             yoff;
+    struct s_gun*   next;
+}                   gun;
+
 typedef struct      s_player {
     /* player position */
     int             x, y;
@@ -69,6 +86,8 @@ typedef struct      s_player {
     int             shield;
     /* collision square */
     collision_sqr   col;
+    /* guns */
+    gun*            guns;
 }                   player;
 
 typedef struct      s_flying_obj {
@@ -80,16 +99,26 @@ typedef struct      s_flying_obj {
     int             collisionable;
     collision_sqr   col;
     int             col_damage;
+    int             life;
     struct s_flying_obj* next;
 }                   flying_obj;
 
 typedef struct      s_shooter_ctx {
+    /* SDL context */
     SDL_Window*     screen;
     SDL_Renderer*   renderer;
+    /* frame input */
     input           i;
+    /* all sprites assets */
     asset**         a;
-    player          p;
-    flying_obj*     fos;
+    /* player context */
+    player          p; /* layer 5 */
+    /* flying objects */
+    flying_obj*     bg; /* layer 1 */
+    flying_obj*     pews; /* layer 2 */
+    flying_obj*     asteroids; /* layer 3 */
+    flying_obj*     enemies; /* layer 4 */
+    /* freelist of flying objects */
     flying_obj*     free_fos;
     unsigned int    free_fos_cpt;
 }                   shooter_ctx;
@@ -113,6 +142,7 @@ int     spawning(shooter_ctx* ctx);
 int     load_assets(shooter_ctx* ctx);
 int     unload_assets(shooter_ctx* ctx);
 /* flying_objs.c */
+flying_obj* fo_new(shooter_ctx* ctx);
 int     manage_flying_obj(shooter_ctx* ctx);
 /* player.c */
 int     init_player(shooter_ctx* ctx);

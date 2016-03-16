@@ -53,6 +53,10 @@
 #define A_ASTEROID10a   "assets/sprites/asteroids/asteroid10a.png"
 #define A_ASTEROID10b   "assets/sprites/asteroids/asteroid10b.png"
 
+/* SHIPS */
+#define A_PEW1          "assets/sprites/pew/pew1.png"
+#define A_PEW2          "assets/sprites/pew/pew2.png"
+#define A_PEW3          "assets/sprites/pew/pew3.png"
 
 enum asset {
     /* BG: 1 */
@@ -107,8 +111,13 @@ enum asset {
     star1,
     star2,
 
+    /* pew pew */
+    pew1,
+    pew2,
+    pew3,
+
     last
-}; /* TOTAL: 44 */
+}; /* TOTAL: 47 */
 
 struct texture_asset {
     enum asset      index;

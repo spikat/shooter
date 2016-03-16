@@ -57,7 +57,16 @@ int     draw(shooter_ctx* ctx)
     _DRAW_BACKGROUND(ctx, ctx->a[background0], 0, 0);
 
     /* FLYING OBJS */
-    for (fo = ctx->fos; fo; fo = fo->next) {
+    for (fo = ctx->bg; fo; fo = fo->next) {
+        _DRAW_IMAGE(ctx, fo->a, fo->x, fo->y);
+    }
+    for (fo = ctx->asteroids; fo; fo = fo->next) {
+        _DRAW_IMAGE(ctx, fo->a, fo->x, fo->y);
+    }
+    for (fo = ctx->pews; fo; fo = fo->next) {
+        _DRAW_IMAGE(ctx, fo->a, fo->x, fo->y);
+    }
+    for (fo = ctx->enemies; fo; fo = fo->next) {
         _DRAW_IMAGE(ctx, fo->a, fo->x, fo->y);
     }
 

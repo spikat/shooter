@@ -54,6 +54,11 @@ struct texture_asset asset_table [] = {
     { star1, A_STAR1 },
     { star2, A_STAR2 },
 
+    /* pew pew */
+    { pew1, A_PEW1 },
+    { pew2, A_PEW2 },
+    { pew3, A_PEW3 },
+
     { last, NULL }
 };
 
