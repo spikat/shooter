@@ -51,8 +51,6 @@ struct texture_asset asset_table [] = {
     { planet5, A_PLANET5 },
     { planet6, A_PLANET6 },
     { planet7, A_PLANET7 },
-    { star1, A_STAR1 },
-    { star2, A_STAR2 },
 
     /* pew pew */
     { pew1, A_PEW1 },

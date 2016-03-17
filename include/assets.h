@@ -1,6 +1,14 @@
 #ifndef __ASSETS_H__
 #define __ASSETS_H__
 
+#define BGS_COUNT               1
+#define SHIPS_COUNT             7
+#define ASTEROIDS_COUNT         20
+#define CELESTIAL_BODIES_COUNT  14
+#define PEWS_COUNT              3
+#define TOTAL_ASSETS_COUNT (BGS_COUNT + SHIPS_COUNT + ASTEROIDS_COUNT + \
+                            CELESTIAL_BODIES_COUNT + PEWS_COUNT)
+
 /* BACKGROUND */
 #define A_BACKGROUND    "assets/sprites/backgrounds/stars.png"
 
@@ -19,8 +27,6 @@
 #define A_PLANET5       "assets/sprites/celestial_bodies/planet5.png"
 #define A_PLANET6       "assets/sprites/celestial_bodies/planet6.png"
 #define A_PLANET7       "assets/sprites/celestial_bodies/planet7.png"
-#define A_STAR1         "assets/sprites/celestial_bodies/star1.png"
-#define A_STAR2         "assets/sprites/celestial_bodies/star2.png"
 
 /* SHIPS */
 #define A_SHIP1         "assets/sprites/ships/ship1.png"
@@ -53,7 +59,7 @@
 #define A_ASTEROID10a   "assets/sprites/asteroids/asteroid10a.png"
 #define A_ASTEROID10b   "assets/sprites/asteroids/asteroid10b.png"
 
-/* SHIPS */
+/* PEWS */
 #define A_PEW1          "assets/sprites/pew/pew1.png"
 #define A_PEW2          "assets/sprites/pew/pew2.png"
 #define A_PEW3          "assets/sprites/pew/pew3.png"
@@ -108,8 +114,6 @@ enum asset {
     planet5,
     planet6,
     planet7,
-    star1,
-    star2,
 
     /* pew pew */
     pew1,

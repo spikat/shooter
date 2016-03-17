@@ -115,6 +115,7 @@ typedef struct      s_shooter_ctx {
     player          p; /* layer 5 */
     /* flying objects */
     flying_obj*     bg; /* layer 1 */
+    int             bg_cpt;
     flying_obj*     pews; /* layer 2 */
     flying_obj*     asteroids; /* layer 3 */
     flying_obj*     enemies; /* layer 4 */

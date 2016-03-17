@@ -54,7 +54,29 @@ int         is_asteroid_collision(shooter_ctx* ctx, flying_obj* fo)
 
 int         manage_flying_bg(shooter_ctx* ctx)
 {
-    /* TODO */
+    flying_obj* fo;
+    flying_obj* last = NULL;
+
+    for (fo = ctx->bg; fo; ) {
+        fo->x += fo->xspeed;
+        fo->y += fo->yspeed;
+        if (fo->x > SCREEN_WIDTH ||
+            fo->y > SCREEN_HEIGHT ||
+            fo->x + fo->a->sx < 0) {
+            /* detach & destroy */
+            if (last) last->next = fo->next;
+            else ctx->bg = fo->next;
+            fo_destroy(ctx, fo);
+            /* next elem */
+            if (last) fo = last->next;
+            else fo = ctx->bg;
+            ctx->bg_cpt--;
+        } else {
+            /* next elem */
+            last = fo;
+            fo = fo->next;
+        }
+    }
     return (0);
 }
 

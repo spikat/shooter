@@ -56,8 +56,7 @@ int     init_player(shooter_ctx* ctx)
     ctx->p.armor = PLAYER_BASE_ARMOR;
     ctx->p.shield = PLAYER_BASE_SHIELD;
     change_player_ship(ctx, ctx->a[ship1]);
-    if (player_ship_add_gun(ctx, top, gun1)) return (1);
-    /* if (player_ship_add_gun(ctx, left, gun2)) return (1); */
-    /* if (player_ship_add_gun(ctx, right, gun3)) return (1); */
+    if (player_ship_add_gun(ctx, right, gun1)) return (1);
+    if (player_ship_add_gun(ctx, left, gun1)) return (1);
     return (0);
 }
