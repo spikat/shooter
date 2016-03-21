@@ -15,7 +15,11 @@ AC_PROG_RANLIB
 AM_PROG_CC_C_O
 
 PKG_PROG_PKG_CONFIG
-dnl PKG_CHECK_MODULES(libsdl2, libsdl2-dev >= 2.0.0 )
+
+PKG_CHECK_MODULES( sdl2, sdl2 >= 2.0.0 )
+PKG_CHECK_MODULES( SDL2_ttf, SDL2_ttf >= 2.0.0 )
+PKG_CHECK_MODULES( SDL2_mixer, SDL2_mixer >= 2.0.0 )
+PKG_CHECK_MODULES( SDL2_image, SDL2_image >= 2.0.0 )
 
 AC_HEADER_STDC
 AC_CHECK_HEADERS([stdlib.h])
