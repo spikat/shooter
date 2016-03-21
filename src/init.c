@@ -44,6 +44,7 @@ int     deps_init(shooter_ctx* ctx)
         return (1);
     }
 
+#ifdef SOUND
     /* SDL mixer */
     if ((Mix_Init(MIX_INIT_FLAC|MIX_INIT_MP3|MIX_INIT_OGG)) !=
                  (MIX_INIT_FLAC|MIX_INIT_MP3|MIX_INIT_OGG)) {
@@ -55,6 +56,7 @@ int     deps_init(shooter_ctx* ctx)
         return (1);
     }
     Mix_AllocateChannels(32);
+#endif /* SOUND */
     srand(time(NULL));
     return (0);
 }
@@ -73,8 +75,10 @@ int     deps_cleanup(shooter_ctx* ctx)
     /* SDL_TTF cleanup */
     TTF_Quit();
 
+#ifdef SOUND
     /* SDL mixer */
     Mix_Quit();
+#endif /* SOUND */
 
     SDL_Quit();
     return (0);

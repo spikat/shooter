@@ -29,11 +29,18 @@ AC_ARG_ENABLE(debug, AS_HELP_STRING([--enable-debug], [turns on debug compiler, 
 if test x$enable_debug = xyes; then
     AC_DEFINE([DEBUG], [1], [debug enabled])
     CFLAGS="$CFLAGS -ggdb -W -Wall -O0"
-    dnl CXXFLAGS="$CXXFLAGS -ggdb -W -Wall -O0"
 else
     CFLAGS="$CFLAGS -W -Wall -DNDEBUG"
-    dnl CXXFLAGS="$CXXFLAGS -Wall -DNDEBUG"
 fi
+
+######## SOUND options #######
+AC_ARG_ENABLE(sound, AS_HELP_STRING([--disable-sound], [turns off sound, default:enabled]))
+if test x$enable_sound = xno; then
+    CFLAGS="$CFLAGS -DNSOUND"
+else
+    AC_DEFINE([SOUND], [1], [sound enabled])
+fi
+AM_CONDITIONAL(USE_SOUND, test x$enable_sound = xyes)
 
 AC_CONFIG_FILES([Makefile
                  src/Makefile])

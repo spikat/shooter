@@ -6,7 +6,12 @@ spishooter_SOURCES			= main.c init.c draw.c inputs.c delay.c \
 
 spishooter_CFLAGS			= -Wall -I$(top_srcdir)/include \
 							  ${sdl2_CFLAGS} ${SDL2_ttf_CFLAGS} \
-							  ${SDL2_image_CFLAGS} ${SDL2_mixer_CFLAGS}
+							  ${SDL2_image_CFLAGS}
 
 spishooter_LDADD 			= ${sdl2_LIBS} ${SDL2_ttf_LIBS} \
-							  ${SDL2_image_LIBS} ${SDL2_mixer_LIBS}
+							  ${SDL2_image_LIBS}
+
+if USE_SOUND
+spishooter_CFLAGS			+= ${SDL2_mixer_CFLAGS}
+spishooter_LDADD			+= ${SDL2_mixer_LIBS}
+endif
