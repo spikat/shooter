@@ -112,6 +112,7 @@ int     load_assets(shooter_ctx* ctx)
         TTF_ERROR("TTF_OpenFont");
         return (1);
     }
+    TTF_SetFontStyle(ctx->main_font, A_MAIN_FONT_STYLE);
     ctx->main_font_color = (SDL_Color)A_MAIN_FONT_COLOR;
     return (0);
 }

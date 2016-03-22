@@ -9,6 +9,7 @@
 
 #define A_MAIN_FONT         "assets/fonts/Capture_it-webfont.ttf"
 #define A_MAIN_FONT_SZ      22
+#define A_MAIN_FONT_STYLE   TTF_STYLE_NORMAL
 #define A_MAIN_FONT_COLOR   { 255, 255, 255, 0 }
 
 /*
