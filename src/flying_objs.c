@@ -46,6 +46,7 @@ int         is_asteroid_collision(shooter_ctx* ctx, flying_obj* fo)
                 if (lasta) lasta->next = a->next;
                 else ctx->asteroids = a->next;
                 fo_destroy(ctx, a);
+                ctx->p.score += SCORE_SHOOT_ASTEROID;
             }
             return (1);
         }
@@ -99,6 +100,7 @@ int         manage_flying_asteroids(shooter_ctx* ctx)
             if (last) fo = last->next;
             else fo = ctx->asteroids;
         } else if (is_player_collision(ctx, fo)) {
+            ctx->p.score += SCORE_CRASH_ASTEROID;
             if (ctx->p.shield) {
                 fo->col_damage -= ctx->p.shield;
                 ctx->p.shield = 0;

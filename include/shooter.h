@@ -32,6 +32,9 @@
 
 #define MAX_FREE_FOS    64
 
+#define SCORE_CRASH_ASTEROID    (-100)
+#define SCORE_SHOOT_ASTEROID    (10)
+
 #define SDL_ERROR(x)                                                \
     printf("%s: %s Error: %s\n", __FUNCTION__, x, SDL_GetError());
 
@@ -88,6 +91,7 @@ typedef struct      s_player {
     collision_sqr   col;
     /* guns */
     gun*            guns;
+    int             score;
 }                   player;
 
 typedef struct      s_flying_obj {

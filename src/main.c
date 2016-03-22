@@ -47,5 +47,9 @@ int     main(__attribute__((unused)) int ac, __attribute__((unused)) char** av)
     }
     unload_assets(&ctx);
     deps_cleanup(&ctx);
+    printf("\nYour score is %i, %s\n", ctx.p.score,
+           (ctx.p.score <= 0 ? "big zero.." :
+            (ctx.p.score >= 500 ? "star killer!" :
+             "rookie.")));
     return (ret);
 }
