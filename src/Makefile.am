@@ -2,7 +2,7 @@ bin_PROGRAMS				= spishooter
 
 spishooter_SOURCES			= main.c init.c draw.c inputs.c delay.c \
 							  spawning.c assets.c flying_objs.c \
-							  player.c collision.c guns.c
+							  player.c collision.c guns.c score.c
 
 spishooter_CFLAGS			= -Wall -I$(top_srcdir)/include \
 							  ${sdl2_CFLAGS} ${SDL2_ttf_CFLAGS} \

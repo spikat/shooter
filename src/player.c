@@ -55,7 +55,7 @@ int     init_player(shooter_ctx* ctx)
     ctx->p.y = SCREEN_HEIGHT * 0.9;
     ctx->p.armor = PLAYER_BASE_ARMOR;
     ctx->p.shield = PLAYER_BASE_SHIELD;
-    ctx->p.score = 0;
+    init_score(ctx);
     change_player_ship(ctx, ctx->a[ship1]);
     if (player_ship_add_gun(ctx, right, gun1)) return (1);
     if (player_ship_add_gun(ctx, left, gun1)) return (1);

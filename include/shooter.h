@@ -34,9 +34,15 @@
 
 #define SCORE_CRASH_ASTEROID    (-100)
 #define SCORE_SHOOT_ASTEROID    (10)
+#define SCORE_X_POS             10
+#define SCORE_Y_POS             10
 
 #define SDL_ERROR(x)                                                \
     printf("%s: %s Error: %s\n", __FUNCTION__, x, SDL_GetError());
+
+#define TTF_ERROR(x)                                                \
+    printf("%s: %s Error: %s\n", __FUNCTION__, x, TTF_GetError());
+
 
 /*
   STRUCTS
@@ -111,10 +117,14 @@ typedef struct      s_shooter_ctx {
     /* SDL context */
     SDL_Window*     screen;
     SDL_Renderer*   renderer;
+    asset           score;
     /* frame input */
     input           i;
     /* all sprites assets */
     asset**         a;
+    /* fonts assets */
+    TTF_Font*       main_font;
+    SDL_Color       main_font_color;
     /* player context */
     player          p; /* layer 5 */
     /* flying objects */
@@ -156,6 +166,8 @@ int     change_player_ship(shooter_ctx* ctx, asset* a);
 void    fill_collision_square(collision_sqr* col, int sx, int sy);
 int     boom(collision_sqr* col1, int x1, int y1,
              collision_sqr* col2, int x2, int y2);
-
+/* score.c */
+int     init_score(shooter_ctx* ctx);
+int     update_score(shooter_ctx* ctx, int score);
 
 #endif /* __SHOOTER_H__ */

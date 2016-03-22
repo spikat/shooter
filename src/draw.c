@@ -73,6 +73,9 @@ int     draw(shooter_ctx* ctx)
     /* player ship */
     _DRAW_IMAGE(ctx, ctx->p.ship, ctx->p.x, ctx->p.y);
 
+    /* draw score */
+    _DRAW_IMAGE(ctx, &(ctx->score), SCORE_X_POS, SCORE_Y_POS);
+
     /* draw all */
 	SDL_RenderPresent(ctx->renderer);
 

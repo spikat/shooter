@@ -99,10 +99,20 @@ int     load_assets(shooter_ctx* ctx)
     unsigned int i;
 
     if (!ctx) return (EINVAL);
+
+    /* LOAD SPRITES */
     ctx->a = malloc(sizeof(SDL_Texture*) * (enum asset)(last));
     if (!(ctx->a)) return (ENOMEM);
     for (i = 0; i < (enum asset)(last); i++)
         _LOAD_IMAGE(ctx, asset_table[i].path, &(ctx->a[i]));
+
+    /* LOAD FONT */
+    ctx->main_font = TTF_OpenFont(A_MAIN_FONT, A_MAIN_FONT_SZ);
+    if (!(ctx->main_font)) {
+        TTF_ERROR("TTF_OpenFont");
+        return (1);
+    }
+    ctx->main_font_color = (SDL_Color)A_MAIN_FONT_COLOR;
     return (0);
 }
 
@@ -110,10 +120,14 @@ int     unload_assets(shooter_ctx* ctx)
 {
     unsigned int i;
 
+    /* UNLOAD SPRITES */
     if (!ctx) return (EINVAL);
     for (i = 0; i < (enum asset)last; i++) {
         SDL_DestroyTexture(ctx->a[i]->texture);
         free(ctx->a[i]);
     }
+
+    /* UNLOAD FONTS */
+    TTF_CloseFont(ctx->main_font);
     return (0);
 }

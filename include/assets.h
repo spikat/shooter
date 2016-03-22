@@ -1,6 +1,22 @@
 #ifndef __ASSETS_H__
 #define __ASSETS_H__
 
+/*
+ *
+ * FONTS
+ *
+ */
+
+#define A_MAIN_FONT         "assets/fonts/Capture_it-webfont.ttf"
+#define A_MAIN_FONT_SZ      22
+#define A_MAIN_FONT_COLOR   { 255, 255, 255, 0 }
+
+/*
+ *
+ * SPRITES
+ *
+ */
+
 #define BGS_COUNT               1
 #define SHIPS_COUNT             7
 #define ASTEROIDS_COUNT         20
