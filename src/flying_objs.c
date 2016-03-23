@@ -48,6 +48,7 @@ int         is_asteroid_collision(shooter_ctx* ctx, flying_obj* fo)
                 fo_destroy(ctx, a);
                 update_score(ctx, SCORE_SHOOT_ASTEROID);
             }
+            add_hit(ctx, fo->x + fo->a->sx / 2, fo->y + fo->a->sy / 2);
             return (1);
         }
     return (0);

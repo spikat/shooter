@@ -6,6 +6,6 @@ if [ ! -e ./src/spishooter ]; then
 fi
 
 cp ./src/spishooter . || exit 1;
-cp ./src/spishooter_static . || exit 1;
-tar cvzf spishooter.tgz spishooter spishooter_static assets || exit 1
+tar cvf spishooter.tar spishooter assets || exit 1
+tar cvzf spishooter.tar.gz spishooter.tar || exit 1
 

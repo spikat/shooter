@@ -12,6 +12,8 @@
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_render.h>
 
+#include "particles.h"
+
 /*
   DEFINES
 */
@@ -101,6 +103,8 @@ typedef struct      s_player {
     /* guns */
     gun*            guns;
     int             score;
+    /* particles */
+    particle        parts[NB_SHIP_PARTS];
 }                   player;
 
 typedef struct      s_flying_obj {
@@ -139,6 +143,9 @@ typedef struct      s_shooter_ctx {
     /* freelist of flying objects */
     flying_obj*     free_fos;
     unsigned int    free_fos_cpt;
+    /* parciles */
+    hit_parts*      hits;
+    hit_parts*      hits_free;
 }                   shooter_ctx;
 
 /*
@@ -172,5 +179,8 @@ int     boom(collision_sqr* col1, int x1, int y1,
 /* score.c */
 int     init_score(shooter_ctx* ctx);
 int     update_score(shooter_ctx* ctx, int score);
+/* particles.c */
+int     manage_particles(shooter_ctx* ctx);
+int     add_hit(shooter_ctx* ctx, int x, int y);
 
 #endif /* __SHOOTER_H__ */

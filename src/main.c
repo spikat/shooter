@@ -40,6 +40,9 @@ int     main(__attribute__((unused)) int ac, __attribute__((unused)) char** av)
         ret = spawning(&ctx);
         if (ret) return (ret);
 
+        ret = manage_particles(&ctx);
+        if (ret) return (ret);
+
         ret = draw(&ctx);
         if (ret) break;
 
