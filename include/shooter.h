@@ -39,9 +39,12 @@
 
 #define SDL_ERROR(x)                                                \
     printf("%s: %s Error: %s\n", __FUNCTION__, x, SDL_GetError());
-
 #define TTF_ERROR(x)                                                \
     printf("%s: %s Error: %s\n", __FUNCTION__, x, TTF_GetError());
+#define IMG_ERROR(x)                                                \
+    printf("%s: %s Error: %s\n", __FUNCTION__, x, IMG_GetError());
+#define MIX_ERROR(x)                                                \
+    printf("%s: %s Error: %s\n", __FUNCTION__, x, Mix_GetError());
 
 
 /*

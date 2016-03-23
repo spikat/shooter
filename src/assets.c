@@ -73,7 +73,7 @@ int     load_image(shooter_ctx* ctx, char *name, asset** a)
         SDL_FreeSurface(loadedImage);
     }
     else {
-        SDL_ERROR("IMG_Load");
+        IMG_ERROR("IMG_Load");
         return (1);
     }
 
