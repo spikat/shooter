@@ -24,6 +24,14 @@ typedef struct  s_particle {
 #define HIT_MIN_LIFE        3
 #define HIT_MAX_LIFE        20
 
+#define NB_CRASH_PARTS        NB_HIT_PARTS
+#define MAX_CRASH_PARTS_VEL   4
+#define CRASH_PARTS_COLOR     255, 255, 255, 192
+#define CRASH_FRAMES          100
+#define CRASH_MIN_LIFE        20
+#define CRASH_MAX_LIFE        100
+
+
 typedef struct          s_hit_parts {
     int                 x, y;
     int                 frame;

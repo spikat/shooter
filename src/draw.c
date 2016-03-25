@@ -58,6 +58,27 @@ int     draw_hits_particles(shooter_ctx* ctx)
     return (0);
 }
 
+int     draw_crashs_particles(shooter_ctx* ctx)
+{
+    int         i;
+    hit_parts*  h;
+
+    if (SDL_SetRenderDrawColor(ctx->renderer, CRASH_PARTS_COLOR)) {
+        SDL_ERROR("SDL_SetRenderDrawColor");
+        return (1);
+    }
+    for (h = ctx->crashs; h; h = h->next)
+        for (i = 0; i < NB_CRASH_PARTS; i++)
+            if (h->parts[i].life) {
+                if (SDL_RenderDrawPoint(ctx->renderer,
+                                        h->parts[i].x, h->parts[i].y)) {
+                    SDL_ERROR("SDL_RenderDrawPoint");
+                    return (1);
+                }
+            }
+    return (0);
+}
+
 int     draw_player_ship_particles(shooter_ctx* ctx)
 {
     int i;
@@ -112,6 +133,9 @@ int     draw(shooter_ctx* ctx)
 
     /* HITS */
     draw_hits_particles(ctx);
+
+    /* CRASHS */
+    draw_crashs_particles(ctx);
 
     /* player ship */
     draw_player_ship_particles(ctx);

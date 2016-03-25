@@ -101,6 +101,7 @@ int         manage_flying_asteroids(shooter_ctx* ctx)
             if (last) fo = last->next;
             else fo = ctx->asteroids;
         } else if (is_player_collision(ctx, fo)) {
+            add_crash(ctx, fo->x + fo->a->sx / 2, fo->y + fo->a->sy / 2);
             update_score(ctx, SCORE_CRASH_ASTEROID);
             if (ctx->p.shield) {
                 fo->col_damage -= ctx->p.shield;

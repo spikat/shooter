@@ -144,6 +144,7 @@ typedef struct      s_shooter_ctx {
     flying_obj*     free_fos;
     unsigned int    free_fos_cpt;
     /* parciles */
+    hit_parts*      crashs;
     hit_parts*      hits;
     hit_parts*      hits_free;
 }                   shooter_ctx;
@@ -182,5 +183,6 @@ int     update_score(shooter_ctx* ctx, int score);
 /* particles.c */
 int     manage_particles(shooter_ctx* ctx);
 int     add_hit(shooter_ctx* ctx, int x, int y);
+int     add_crash(shooter_ctx* ctx, int x, int y);
 
 #endif /* __SHOOTER_H__ */
