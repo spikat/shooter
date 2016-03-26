@@ -1,5 +1,7 @@
 #include "shooter.h"
 
+extern int run;
+
 int get_input(shooter_ctx* ctx)
 {
     SDL_Event event;
@@ -74,7 +76,7 @@ int get_input(shooter_ctx* ctx)
                 break;
 
             case SDLK_ESCAPE:
-                ctx->i.escape = 1;
+                ctx->i.escape = 0;
                 break;
 
             case SDLK_RETURN:
@@ -100,20 +102,53 @@ int get_input(shooter_ctx* ctx)
 
 int     parse_input(shooter_ctx* ctx)
 {
-    if (ctx->i.left == 1)
-        ctx->p.x -= PLAYER_PIXELS_PER_MOVE;
-    if (ctx->i.right == 1)
-        ctx->p.x += PLAYER_PIXELS_PER_MOVE;
-    if (ctx->i.up == 1)
-        ctx->p.y -= PLAYER_PIXELS_PER_MOVE;
-    if (ctx->i.down == 1)
-        ctx->p.y += PLAYER_PIXELS_PER_MOVE;
+    switch (ctx->gs) {
+    case (shooter) :
+        if (ctx->i.left == 1)
+            ctx->p.x -= PLAYER_PIXELS_PER_MOVE;
+        if (ctx->i.right == 1)
+            ctx->p.x += PLAYER_PIXELS_PER_MOVE;
+        if (ctx->i.up == 1)
+            ctx->p.y -= PLAYER_PIXELS_PER_MOVE;
+        if (ctx->i.down == 1)
+            ctx->p.y += PLAYER_PIXELS_PER_MOVE;
 
-    /* check borders */
-    if (ctx->p.x < 0) ctx->p.x = 0;
-    if ((ctx->p.x + ctx->p.ship->sx) >= SCREEN_WIDTH) ctx->p.x = (SCREEN_WIDTH - ctx->p.ship->sx);
-    if (ctx->p.y < 0) ctx->p.y = 0;
-    if (ctx->p.y + ctx->p.ship->sy > SCREEN_HEIGHT) ctx->p.y = SCREEN_HEIGHT - ctx->p.ship->sy;
+        /* check borders */
+        if (ctx->p.x < 0)
+            ctx->p.x = 0;
+        if ((ctx->p.x + ctx->p.ship->sx) >= SCREEN_WIDTH)
+            ctx->p.x = (SCREEN_WIDTH - ctx->p.ship->sx);
+        if (ctx->p.y < 0)
+            ctx->p.y = 0;
+        if (ctx->p.y + ctx->p.ship->sy > SCREEN_HEIGHT)
+            ctx->p.y = SCREEN_HEIGHT - ctx->p.ship->sy;
+
+        if (ctx->i.escape) {
+            ctx->gs = score_tab;
+            ctx->i.escape = 0;
+        }
+        break ;
+
+    case score_tab:
+        if (ctx->i.escape) {
+            run = 0;
+            ctx->i.escape = 0;
+        }
+        if (ctx->i.enter) {
+            printf("\nYour score is %i, %s\n", ctx->p.score,
+                   (ctx->p.score <= 0 ? "big zero.." :
+                    (ctx->p.score >= 500 ? "star killer!" :
+                     "rookie.")));
+            clean_shooter(ctx);
+            init_player(ctx);
+            ctx->gs = shooter;
+            ctx->i.enter = 0;
+        }
+
+        break;
+    default :
+        break ;
+    }
 
     return (0);
 }

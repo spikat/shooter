@@ -104,17 +104,13 @@ int     draw_player_ship_particles(shooter_ctx* ctx)
 #define _DRAW_BACKGROUND(ctx, a, x, y)             \
     if (draw_background(ctx, a, x, y)) return (1)
 
-int     draw(shooter_ctx* ctx)
+int     draw_shooter(shooter_ctx* ctx)
 {
-    /* static int  first = 1; */
     flying_obj* fo;
 
     /* BACKGROUND */
-    /* if (first) { */
     SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, 255);
     SDL_RenderClear(ctx->renderer);
-        /* first = 0; */
-    /* } */
     _DRAW_BACKGROUND(ctx, ctx->a[background0], 0, 0);
 
     /* FLYING OBJS */
@@ -147,6 +143,32 @@ int     draw(shooter_ctx* ctx)
     /* draw all */
     SDL_RenderPresent(ctx->renderer);
 
-    /* SDL_Delay(1); /\* ?? TODO *\/ */
     return (0);
+}
+
+int     draw_score_tab(shooter_ctx* ctx)
+{
+    /* BACKGROUND */
+    SDL_SetRenderDrawColor(ctx->renderer, 0, 0, 0, 255);
+    SDL_RenderClear(ctx->renderer);
+    _DRAW_BACKGROUND(ctx, ctx->a[background0], 0, 0);
+
+    /* draw score */
+    _DRAW_IMAGE(ctx, &(ctx->score),
+                SCREEN_WIDTH / 2 - ctx->score.sx / 2,
+                SCREEN_HEIGHT / 2 - ctx->score.sy / 2);
+
+
+    /* draw all */
+    SDL_RenderPresent(ctx->renderer);
+    return (0);
+}
+
+int     draw(shooter_ctx* ctx)
+{
+    if (ctx->gs == shooter)
+        return (draw_shooter(ctx));
+    else if (ctx->gs == score_tab)
+        return (draw_score_tab(ctx));
+    return (1);
 }

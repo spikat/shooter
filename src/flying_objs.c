@@ -110,7 +110,8 @@ int         manage_flying_asteroids(shooter_ctx* ctx)
             ctx->p.armor -= fo->col_damage;
             if (ctx->p.armor <= 0) {
                 puts("\nBoom. You are dead.");
-                return (1);
+                ctx->gs = score_tab;
+                return (0);
             }
             /* detach & destroy */
             if (last) last->next = fo->next;

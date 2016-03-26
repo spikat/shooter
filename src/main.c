@@ -1,5 +1,7 @@
 #include "shooter.h"
 
+int run = 0;
+
 void    usage(void)
 {
     puts("commads:\n"
@@ -13,7 +15,6 @@ int     main(__attribute__((unused)) int ac, __attribute__((unused)) char** av)
     shooter_ctx     ctx;
     unsigned int    framelimit;
     int             ret;
-    int             run = 1;
 
     ret = deps_init(&ctx);
     if (ret) return (ret);
@@ -26,22 +27,23 @@ int     main(__attribute__((unused)) int ac, __attribute__((unused)) char** av)
 
     usage();
 
-    while (run) {
+    ctx.gs = shooter;
+    for (run = 1; run; ) {
         framelimit = SDL_GetTicks() + TICK_60_FPS;
 
         ret = manage_inputs(&ctx);
         if (ret) break;
 
-        if (ctx.i.escape) break;
+        if (ctx.gs == shooter) {
+            if (manage_flying_obj(&ctx))
+                break;
 
-        if (manage_flying_obj(&ctx))
-            break;
+            ret = spawning(&ctx);
+            if (ret) return (ret);
 
-        ret = spawning(&ctx);
-        if (ret) return (ret);
-
-        ret = manage_particles(&ctx);
-        if (ret) return (ret);
+            ret = manage_particles(&ctx);
+            if (ret) return (ret);
+        }
 
         ret = draw(&ctx);
         if (ret) break;

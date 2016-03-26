@@ -49,6 +49,13 @@
     printf("%s: %s Error: %s\n", __FUNCTION__, x, Mix_GetError());
 
 
+enum game_status {
+    intro = 0,
+    main_menu,
+    shooter,
+    score_tab,
+};
+
 /*
   STRUCTS
 */
@@ -121,6 +128,7 @@ typedef struct      s_flying_obj {
 }                   flying_obj;
 
 typedef struct      s_shooter_ctx {
+    enum game_status gs;
     /* SDL context */
     SDL_Window*     screen;
     SDL_Renderer*   renderer;
@@ -156,6 +164,7 @@ typedef struct      s_shooter_ctx {
 /* init.c */
 int     deps_init(shooter_ctx* ctx);
 int     deps_cleanup(shooter_ctx* ctx);
+int     clean_shooter(shooter_ctx* ctx);
 /* inputs.c */
 int     manage_inputs(shooter_ctx* ctx);
 /* draw.c */

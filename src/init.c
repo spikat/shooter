@@ -83,3 +83,32 @@ int     deps_cleanup(shooter_ctx* ctx)
     SDL_Quit();
     return (0);
 }
+
+
+int     clean_shooter(shooter_ctx* ctx)
+{
+    flying_obj* fo;
+    hit_parts*  h;
+
+    /* destroy flying objects */
+    for (fo = ctx->bg; fo;
+         ctx->bg = fo->next, free(fo), fo = ctx->bg);
+    for (fo = ctx->pews; fo;
+         ctx->pews = fo->next, free(fo), fo = ctx->pews);
+    for (fo = ctx->asteroids; fo;
+         ctx->asteroids = fo->next, free(fo), fo = ctx->asteroids);
+    for (fo = ctx->enemies; fo;
+         ctx->enemies = fo->next, free(fo), fo = ctx->enemies);
+    for (fo = ctx->free_fos; fo;
+         ctx->free_fos = fo->next, free(fo), fo = ctx->free_fos);
+
+    /* destroy particles */
+    for (h = ctx->crashs; h;
+         ctx->crashs = h->next, free(h), h = ctx->crashs);
+    for (h = ctx->hits; h;
+         ctx->hits = h->next, free(h), h = ctx->hits);
+    for (h = ctx->hits_free; h;
+         ctx->hits_free = h->next, free(h), h = ctx->hits_free);
+
+    return (0);
+}
