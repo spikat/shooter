@@ -14,7 +14,7 @@
 #define ASTEROID_MAX_Y_VELOCITY 10
 #define ASTEROID_LIFE           10
 
-int         spawn_celestial_bodies(shooter_ctx* ctx, int x, int y)
+int         spawn_celestial_bodies(shooter_ctx* ctx, int x)
 {
     flying_obj* fo;
 
@@ -107,7 +107,7 @@ int         spawning(shooter_ctx* ctx)
     /* CELESTIAL BODIES */
     if (!(i % CELESTIAL_BODIES_SPAWN_RATE) &&
         !(rand() % CELESTIAL_BODIES_SPAWN_CHANCE)) {
-        if (spawn_celestial_bodies(ctx, rand() % SCREEN_WIDTH, 0))
+        if (spawn_celestial_bodies(ctx, rand() % SCREEN_WIDTH))
             return (1);
     }
     return (0);
