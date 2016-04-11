@@ -1,1 +1,22 @@
-Nothing to read ATM.
+HOW TO BUILD
+============
+
+Steps to follow:
+
+autoreconf -fi
+./configure
+make
+
+HOW TO PLAY
+===========
+
+src/spishooter
+
+
+SOUND PROBLEM
+=============
+
+If you got an error saying that your sdl-mixer library was built without
+the MP3 sound support (too bad), you can rebuild it manually with souhd
+support, or:
+./configure --disable-sound && make
