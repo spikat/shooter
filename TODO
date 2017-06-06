@@ -1,12 +1,6 @@
 TODO LIST
 =========
 
-== Particles
-
-mini explosions on pew impact
-asteroid explosion
-player/enemy ship explosions
-
 == Weapons
 
 simple enemies weapons
@@ -40,6 +34,7 @@ second boss
 script first level
 script enemies
 script weapons
+script pattern
 
 == bonus
 
@@ -54,14 +49,21 @@ weapons
 repair ship
 subsystems (shields + ?)
 
+== Imputs
+
+Add mouse imput
+
+
 == Multiplayer
 
-wait for player / join players
-auto join party
 player color
 player name
-pvp mode
+coop in same pc (keyboard & mouse)
 score share
+wait for player / join players
+auto join party
+pvp mode
+
 
 == Features
 
