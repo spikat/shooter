@@ -1,7 +1,5 @@
 #include "shooter.h"
 
-int run = 0;
-
 void    usage(void)
 {
     puts("commads:\n"
@@ -28,7 +26,7 @@ int     main(__attribute__((unused)) int ac, __attribute__((unused)) char** av)
     usage();
 
     ctx.gs = shooter;
-    for (run = 1; run; ) {
+    for (ctx.run = 1; ctx.run; ) {
         framelimit = SDL_GetTicks() + TICK_60_FPS;
 
         ret = manage_inputs(&ctx);

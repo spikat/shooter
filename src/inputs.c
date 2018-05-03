@@ -1,7 +1,5 @@
 #include "shooter.h"
 
-extern int run;
-
 int get_input(shooter_ctx* ctx)
 {
     SDL_Event event;
@@ -131,7 +129,7 @@ int     parse_input(shooter_ctx* ctx)
 
     case score_tab:
         if (ctx->i.escape) {
-            run = 0;
+            ctx->run = 0;
             ctx->i.escape = 0;
         }
         if (ctx->i.enter) {

@@ -91,9 +91,6 @@ int     load_image(shooter_ctx* ctx, char *name, asset** a)
 
 }
 
-#define _LOAD_IMAGE(ctx, path, pobj)                     \
-    if (load_image(ctx, path, pobj)) return (1)
-
 int     load_assets(shooter_ctx* ctx)
 {
     unsigned int i;
@@ -104,7 +101,8 @@ int     load_assets(shooter_ctx* ctx)
     ctx->a = malloc(sizeof(SDL_Texture*) * (enum asset)(last));
     if (!(ctx->a)) return (ENOMEM);
     for (i = 0; i < (enum asset)(last); i++)
-        _LOAD_IMAGE(ctx, asset_table[i].path, &(ctx->a[i]));
+        if (load_image(ctx, asset_table[i].path, &(ctx->a[i])))
+            return (1);
 
     /* LOAD FONT */
     ctx->main_font = TTF_OpenFont(A_MAIN_FONT, A_MAIN_FONT_SZ);

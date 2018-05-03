@@ -26,7 +26,8 @@ int     player_ship_add_gun(shooter_ctx* ctx, enum gun_pos pos, enum gun_id id)
 
     g = malloc(sizeof(*g));
     if (!g) return (ENOMEM);
-    fill_gun(ctx, g, id);
+    if (fill_gun(ctx, g, id))
+        return (-1);
     switch (pos) {
     case (top):
         g->xoff = ctx->p.ship->sx / 2;

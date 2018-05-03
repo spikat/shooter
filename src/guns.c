@@ -49,17 +49,30 @@ int _get_gun_index(enum gun_id id)
     return (-1);
 }
 
-void        fill_gun(shooter_ctx* ctx, gun* g, enum gun_id id)
+int         fill_gun(shooter_ctx* ctx, gun* g, enum gun_id id)
 {
     int     gid, pid;
 
+    if (!ctx || !g || id < 0 || id >= gun_last)
+        return (EINVAL);
+
     gid = _get_gun_index(id);
+    if (gid < 0) {
+        fprintf(stderr, "%s Error: failed to get gunid %i.\n", __FUNCTION__, id);
+        return (-1);
+    }
+
     pid = _get_pew_index(gun_tab[gid].pew);
+    if (pid < 0) {
+        fprintf(stderr, "%s Error: failed to get pewid %i.\n", __FUNCTION__, pid);
+        return (-1);
+    }
+
     g->pew.a = ctx->a[pew_tab[pid].a];
     g->pew.damage = pew_tab[pid].damage;
     g->pew.xspeed = pew_tab[pid].xspeed;
     g->pew.yspeed = pew_tab[pid].yspeed;
     g->firerate = gun_tab[gid].firerate;
     g->firecd = 0;
-    return ;
+    return (0);;
 }

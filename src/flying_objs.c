@@ -131,6 +131,8 @@ int         manage_flying_asteroids(shooter_ctx* ctx)
 
 int         manage_flying_enemies(shooter_ctx* ctx)
 {
+    if (!ctx)
+        return (EINVAL);
     /* TODO */
     return (0);
 }

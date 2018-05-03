@@ -128,6 +128,7 @@ typedef struct      s_flying_obj {
 }                   flying_obj;
 
 typedef struct      s_shooter_ctx {
+    int             run;
     enum game_status gs;
     /* SDL context */
     SDL_Window*     screen;

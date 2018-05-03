@@ -22,4 +22,4 @@ enum        gun_id {
     gun_last
 };
 
-void    fill_gun(shooter_ctx* ctx, gun* g, enum gun_id id);
+int     fill_gun(shooter_ctx* ctx, gun* g, enum gun_id id);
