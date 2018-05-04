@@ -1,0 +1,14 @@
+Requirements
+=============
+
+- SDL2_ttf
+- SDL2_mixer
+- SDL2_image
+
+Debian packages
+---------------
+
+- libsdl2-ttf-dev
+- libsdl2-mixer-dev
+- libsdl2-image-dev
+
